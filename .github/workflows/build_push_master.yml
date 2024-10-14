@@ -76,15 +76,25 @@ jobs:
       #     git tag $TAG
       #     git push origin $TAG
 
-      - name: Upload CI Release
-        uses: ncipollo/release-action@v1
+      # - name: Upload CI Release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     token: ${{ secrets.BUILD_PREVIEW_TOKEN }}
+      #     artifacts: "master/buildZip/*"
+      #     owner: "Suwayomi"
+      #     repo: "Suwayomi-WebUI-preview"
+      #     tag: ${{ steps.GenTagName.outputs.value }}
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.4.3
         with:
-          token: ${{ secrets.BUILD_PREVIEW_TOKEN }}
-          artifacts: "master/buildZip/*"
-          owner: "Suwayomi"
-          repo: "Suwayomi-WebUI-preview"
-          tag: ${{ steps.GenTagName.outputs.value }}
+          # Artifact name
+          # name: # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: "master/buildZip/*"
+          # The desired behavior if no files are found using the provided path.
+          retention-days: 1 # optional
 
+          
       # - name: Checkout github pages repo
       #   uses: actions/checkout@v4
       #   with:
