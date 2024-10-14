@@ -53,28 +53,28 @@ jobs:
           echo "$genTag"
           echo "::set-output name=value::$genTag"
 
-      - name: Checkout preview branch
-        uses: actions/checkout@v4
-        with:
-          repository: "Suwayomi/Suwayomi-WebUI-preview"
-          ref: main
-          path: preview
-          token: ${{ secrets.BUILD_PREVIEW_TOKEN }}
+      # - name: Checkout preview branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: "Suwayomi/Suwayomi-WebUI-preview"
+      #     ref: main
+      #     path: preview
+      #     token: ${{ secrets.BUILD_PREVIEW_TOKEN }}
 
-      - name: Create Tag
-        run: |
-          TAG="${{ steps.GenTagName.outputs.value }}"
-          echo "tag: $TAG"
-          cd preview
-          echo "{ \"latest\": \"$TAG\" }" > index.json
-          git add index.json
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git commit -m "Updated to $TAG"
-          git push origin main
+      # - name: Create Tag
+      #   run: |
+      #     TAG="${{ steps.GenTagName.outputs.value }}"
+      #     echo "tag: $TAG"
+      #     cd preview
+      #     echo "{ \"latest\": \"$TAG\" }" > index.json
+      #     git add index.json
+      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      #     git config --global user.name "github-actions[bot]"
+      #     git commit -m "Updated to $TAG"
+      #     git push origin main
 
-          git tag $TAG
-          git push origin $TAG
+      #     git tag $TAG
+      #     git push origin $TAG
 
       - name: Upload CI Release
         uses: ncipollo/release-action@v1
