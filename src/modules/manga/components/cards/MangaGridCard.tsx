@@ -171,6 +171,8 @@ export const MangaGridCard = ({
                                             sx={{
                                                 color: 'white',
                                                 textShadow: '0px 0px 3px #000000',
+                                                max-height: 'unset',
+                                                -webkit-line-clamp: 'unset'
                                             }}
                                         >
                                             {title}
@@ -189,7 +191,7 @@ export const MangaGridCard = ({
                                 component="h3"
                                 sx={{
                                     color: (theme) => (selected ? theme.palette.primary.contrastText : 'text.primary'),
-                                    height: '3rem',
+                                    height: 'auto',
                                     pt: 0.5,
                                 }}
                             >
